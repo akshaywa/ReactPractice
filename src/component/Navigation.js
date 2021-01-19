@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,11 +8,12 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import logo from '../logo.svg'
 import './Navigation.css'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        position: "static"
+        position: "sticky"
     },
     title: {
         flexGrow: 1,
@@ -21,50 +22,54 @@ const useStyles = makeStyles((theme) => ({
     login: {
         fontSize: 17,
         color: "#fff"
+    },
+    linkStyle: {
+        textDecoration: 'none',
+        color: '#3f51b5'
     }
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
     const classes = useStyles();
-    
-    const navigationList = ["Music", "Sports", "News", "Movies"]
-    const musicList = ["Classic", "Disco", "Bollywood", "Indipop", "Rap"]
-    const sportsList = ["Test", "Football Worldcup", "Wimbledon", "Olympics", "IPL"]
-    const newsList = ["Regional", "National", "International", "Sports", "Covid19"]
-    const moviesList = ["Drama", "Romance", "Action", "Adventure", "Biopic"]
-
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [navigationItem, setNavigationItem] = React.useState(null);
     const [subNavigationList, setSubNavigationList] = React.useState([]);
-    
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
 
+        setNavigationItem(event.currentTarget.innerText);
+
         switch (event.currentTarget.innerText) {
-            case "Music": setSubNavigationList(musicList);
+            case "Music":
+                setSubNavigationList(props.musicList);
                 break;
-            case "Sports": setSubNavigationList(sportsList);
+            case "Sports": setSubNavigationList(props.sportsList);
                 break;
-            case "News": setSubNavigationList(newsList);
+            case "News": setSubNavigationList(props.newsList);
                 break;
-            case "Movies": setSubNavigationList(moviesList);
+            case "Movies": setSubNavigationList(props.moviesList);
+                break;
+            default: setSubNavigationList([]);
                 break;
         }
     };
 
-    const handleClose = () => {
+    const handleClose = (event) => {
         setAnchorEl(null);
         setSubNavigationList([]);
     };
 
     return (
-        <div className={classes.root}>
+        <React.Fragment>
+            <Toolbar>{/* content */}</Toolbar>
             <AppBar>
                 <Toolbar>
                     <img src={logo} className='logo' alt="logo" />
                     {
-                        navigationList.map(navigationItem => (
+                        props.navigationList.map(navigationItem => (
                             <Typography className={classes.title} onClick={handleClick} key={navigationItem}>
                                 {navigationItem}
                             </Typography>
@@ -77,13 +82,15 @@ export default function ButtonAppBar() {
                         onClose={handleClose}>
                         {
                             subNavigationList.map(subNavigationItem => (
-                                <MenuItem onClick={handleClose} key={subNavigationItem}>{subNavigationItem}</MenuItem>
+                                <Link key={subNavigationItem} to={"/" + navigationItem + "/" + subNavigationItem} className={classes.linkStyle}>
+                                    <MenuItem onClick={handleClose}>{subNavigationItem}</MenuItem>
+                                </Link>
                             ))
                         }
                     </Menu>
                     <Button className={classes.login}>Login</Button>
                 </Toolbar>
             </AppBar>
-        </div>
+        </React.Fragment>
     );
 }

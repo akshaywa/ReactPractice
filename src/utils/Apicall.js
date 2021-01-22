@@ -31,5 +31,21 @@ export default {
                     reject(error);
                 })
         })
+    },
+
+    getMusic(genre2) {
+        const apiKey = "e5cb67fsZKFQqHejbt0twPcQAZiXCvDV6kbWdIRijMdWPuhmktnQaNVd";
+
+        const baseURL = "https://api.happi.dev/v1/music?q=" + genre2 + "&limit=&apikey=" + apiKey + "&type=";
+
+        return new Promise((resolve, reject) => {
+            axios.get(baseURL)
+                .then(res => {
+                    resolve(res.data.result);
+                })
+                .catch(error => {
+                    reject(error);
+                })
+        })
     }
 }

@@ -1,0 +1,15 @@
+.cardContainer {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+    justify-content: space-around;
+}
+
+.cardSingle {
+    width: 48%;
+    margin-bottom: 3%;
+}
+
+.cardStats {
+    padding: 3%;
+}

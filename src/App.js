@@ -10,7 +10,7 @@ import { Switch, Route } from 'react-router-dom';
 
 
 export default function App() {
-  const navigationList = ["Music", "Sports", "News", "Movies"]
+  const navigationList = ["Music", "Movies", "Sports", "News"]
   const musicList = ["Classic", "Disco", "Bollywood", "Electronic", "Rap"]
   const sportsList = ["Cricket", "Football-Worldcup", "Wimbledon", "Olympics", "IPL"]
   const newsList = ["Regional", "National", "International", "Sports", "Covid19"]

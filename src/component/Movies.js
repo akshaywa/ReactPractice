@@ -7,6 +7,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import Apicall from '../utils/Apicall.js';
 import './Movies.css'
 import { Grid } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Paper from '@material-ui/core/Paper';
 
 export default function Movies(props) {
     const [movieList, setMovieList] = React.useState([]);
@@ -19,9 +21,25 @@ export default function Movies(props) {
         });
     }, [props.genre2]);
 
+    const deleteCard = (event) => {
+        let movieList1 = [...movieList];
+        movieList1.splice(event.target.name, 1);
+        setMovieList(movieList1);
+    };
+
 
     return (
         <React.Fragment>
+            <Paper variant="outlined" style={{ padding: 10 }}>
+                <Typography gutterBottom variant="h6">
+                    Instructions:
+                </Typography>
+                <span style={{ color: 'black', fontSize: 17 }}>
+                    Click on each Movie type in navigation, you will get different Movies from api.<br />
+                You can delete card.
+                </span>
+            </Paper>
+            <br />
             <div className="cardContainer">
                 {
                     movieList.map((movieItem, index) => (
@@ -29,14 +47,15 @@ export default function Movies(props) {
                             <CardContent className="cardContent">
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {movieItem.original_title}
+                                    <DeleteIcon name={index.toString()} onClick={deleteCard} style={{ float: 'right', fill: "#cc0000" }} />
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
                                     {movieItem.overview}
                                 </Typography>
                             </CardContent>
-                            <Grid container className="cardStats" spacing="2">
+                            <Grid container className="cardStats">
                                 <Grid item>
-                                    <FavoriteIcon style={{fill: "red"}}/>
+                                    <FavoriteIcon style={{ fill: "red" }} />
                                 </Grid>
                                 <Grid item>
                                     <Typography component="h5">
@@ -44,7 +63,7 @@ export default function Movies(props) {
                                     </Typography>
                                 </Grid>
                                 <Grid item>
-                                    <ShareIcon style={{fill: "#3f51b5"}}/>
+                                    <ShareIcon style={{ fill: "#3f51b5", marginLeft: 10 }} />
                                 </Grid>
                                 <Grid item>
                                     <Typography component="h5">

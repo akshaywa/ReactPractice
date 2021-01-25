@@ -1,0 +1,9 @@
+.formContainer {
+    border: 1px solid rgb(3, 3, 3);
+    padding: 10px;
+}
+
+.enhanceSelection {
+    border-bottom: 1px solid black;
+    padding-left: 10px;
+}

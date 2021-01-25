@@ -118,7 +118,7 @@ export default function ButtonAppBar(props) {
                 <ListItem button key={"Login"}>
                     <ListItemText primary={"Login"} onClick={handleDrawerClose} />
                 </ListItem>
-                {['Music', 'Sports', 'News', 'Movies'].map((text) => (
+                {['Music', 'Movies', 'Sports'].map((text) => (
                     <ListItem button key={text}>
                         <ListItemText primary={text} onClick={handleClick} />
                     </ListItem>

@@ -58,7 +58,7 @@ const useStyles = makeStyles({
 export default function Music(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(4);
     const [musicList, setMusicList] = React.useState([]);
     const [checkedAll, setChecked] = React.useState(false);
 

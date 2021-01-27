@@ -29,7 +29,7 @@ export default function Movies(props) {
 
 
     return (
-        <React.Fragment>
+        <div style={{marginBottom: '6%'}}>
             <Paper variant="outlined" style={{ padding: 10 }}>
                 <Typography gutterBottom variant="h6">
                     Instructions:
@@ -75,6 +75,6 @@ export default function Movies(props) {
                     ))
                 }
             </div>
-        </React.Fragment >
+        </div >
     );
 }

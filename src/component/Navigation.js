@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,6 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { ThemeContext } from "./ThemeContext.js";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -63,6 +64,7 @@ export default function ButtonAppBar(props) {
     const [subNavigationList, setSubNavigationList] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [width] = useWindowSize();
+    const { isDarkMode } = useContext(ThemeContext);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -131,7 +133,7 @@ export default function ButtonAppBar(props) {
     return (
         <React.Fragment>
             <Toolbar>{/* content */}</Toolbar>
-            <AppBar>
+            <AppBar color={isDarkMode ? "#525252": "primary"}>
                 <Toolbar>
                     <img src={logo} className='logo' alt="logo" />
                     {

@@ -109,8 +109,8 @@ export default function Sports() {
     }
 
     return (
-        <React.Fragment>
-            <Paper style={{ width: 400, height: 200, marginBottom: 20, padding: 10 }}>
+        <div style={{marginBottom: '7%'}}>
+            <Paper style={{ width: 415, height: 200, marginBottom: 20, padding: 10 }}>
                 <Grid container>
                     <Grid item xs={12}>
                         <Typography gutterBottom variant="h6">
@@ -129,8 +129,9 @@ export default function Sports() {
                 </Grid>
             </Paper>
 
-            <Grid container>
-                <Grid container item spacing={1} xs={9} className="formContainer">
+       
+        <Grid container>
+                <Grid container item spacing={1} xs={12} sm={9} className="formContainer" style={{ backgroundColor: "white" }}>
                     <Grid container item spacing={2}>
                         <Grid item md={5} sm={6} xs={12}>
                             <TextField
@@ -139,6 +140,7 @@ export default function Sports() {
                                 variant="filled"
                                 size="small"
                                 fullWidth={true}
+                                required
                                 onChange={handleName}
                             />
                         </Grid>
@@ -171,6 +173,7 @@ export default function Sports() {
                                 variant="filled"
                                 size="small"
                                 fullWidth={true}
+                                required
                                 onChange={handleAddressLine1}
                             />
                         </Grid>
@@ -216,6 +219,7 @@ export default function Sports() {
                                 size="small"
                                 type={showPassword ? 'text' : 'password'}
                                 value={password}
+                                required
                                 onChange={handlePassword}>
                             </TextField>
                             <IconButton
@@ -224,7 +228,8 @@ export default function Sports() {
                                 {showPassword ? <Visibility /> : <VisibilityOff />}
                             </IconButton>
                         </Grid>
-                    </Grid>
+                    </Grid>                    
+                    <p>Select Criteria Fitting In from List:</p>
                     <Grid container item spacing={2}>
                         <Grid item md={3} xs={12}>
                             <Paper variant="outlined" style={{ height: 153 }}>
@@ -258,9 +263,9 @@ export default function Sports() {
                         Submit
                     </Button>
                 </Grid>
-                <Grid container item spacing={1} xs={3}>
+                <Grid container item spacing={1} sm={3}>
                 </Grid>
             </Grid>
-        </React.Fragment>
+        </div>
     );
 }

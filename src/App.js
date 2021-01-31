@@ -13,12 +13,6 @@ import { ThemeProvider } from './component/ThemeContext.js';
 import PageContent from './component/PageContent.js';
 
 export default function App() {
-  const navigationList = ["Music", "Movies", "Sports"]
-  const musicList = ["Classic", "Disco", "Bollywood", "Electronic", "Rap"]
-  const sportsList = ["Cricket", "Football-Worldcup", "Wimbledon", "Olympics", "IPL"]
-  const newsList = ["Regional", "National", "International", "Sports", "Covid19"]
-  const moviesList = ["Drama", "Romance", "Action", "Adventure", "Biopic"]
-
   const getMusic = props => {
     var genre = props.match.params.genre;
     return <Music genre2={genre} />
@@ -46,20 +40,20 @@ export default function App() {
         <PageContent>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Navigation
-                navigationList={navigationList}
-                musicList={musicList}
-                sportsList={sportsList}
-                newsList={newsList}
-                moviesList={moviesList} />
+              <Navigation />
             </Grid>
             <Grid item xs={12} className='mainContainer'>
               <Switch>
                 <Route exact path="/" render={() => <Music genre2={"Classic"} />} />
                 <Route exact path="/music/:genre" render={getMusic} />
-                <Route exact path="/sports/:genre" render={getSports} />
+                <Route exact path="/संगीत/:genre" render={getMusic} />
+                <Route exact path="/sports/:genre" render={getSports} />                
+                <Route exact path="/खेल/:genre" render={getSports} />                
+                <Route exact path="/खेळ/:genre" render={getSports} />
                 <Route exact path="/news/:genre" render={getNews} />
                 <Route exact path="/movies/:genre" render={getMovies} />
+                <Route exact path="/चलचित्र/:genre" render={getMovies} />
+                <Route exact path="/चित्रपट/:genre" render={getMovies} />
               </Switch>
             </Grid>
           </Grid>

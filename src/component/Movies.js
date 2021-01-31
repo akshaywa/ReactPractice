@@ -14,9 +14,12 @@ export default function Movies(props) {
     const [movieList, setMovieList] = React.useState([]);
 
     useEffect(() => {
+        var movieList1 = [];
         Apicall.getMovies(props.genre2).then((movieList2) => {
-            setMovieList(movieList2.data.results);
-        }).catch((error) => {
+            movieList1 = movieList2.data.results;
+            setMovieList(movieList1);
+        }).catch((error) => {            
+            setMovieList([]);
             console.log(error);
         });
     }, [props.genre2]);

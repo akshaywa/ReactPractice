@@ -62,14 +62,15 @@ export default function Music(props) {
     const [musicList, setMusicList] = React.useState([]);
     const [checkedAll, setChecked] = React.useState(false);
 
-    useEffect(() => {
+    useEffect(() => {        
+        var musicList1 = []
         Apicall.getMusic(props.genre2).then((musicList2) => {
-            var musicList1 = []
             for (let music of musicList2) {
                 musicList1.push({ check: false, artistId: music.id_artist, artist: music.artist, albumId: music.id_album, album: music.album, track: music.track });
             }
             setMusicList(musicList1);
         }).catch((error) => {
+            setMusicList([]);
             console.log(error);
         });
     }, [props.genre2]);

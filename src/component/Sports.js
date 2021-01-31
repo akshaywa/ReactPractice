@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import './Sports.css';
@@ -15,6 +15,7 @@ import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import useFormState from './useFormState.js'
 
 const educations = [
     {
@@ -36,55 +37,29 @@ const educations = [
 ];
 
 export default function Sports() {
-    const [education, setEducation] = React.useState('Sports');
-    const [gender, setGender] = React.useState('female');
-    const [showPassword, setShowPassWord] = React.useState(false);
-    const [password, setPassword] = React.useState('');
-    const [name, setName] = React.useState('Akshay');
-    const [addressLine1, setAddressLine1] = React.useState('Nehru Nagar');
-    const [addressLine2, setAddressLine2] = React.useState('Bangalore');
-    const [date, setDate] = React.useState('1996-09-09');
+    const [education, setEducation] = useFormState('');
+    const [gender, setGender] = useFormState('Female');
+    const [showPassword, setShowPassWord] = useState(false);
+    const [password, setPassword] = useFormState('');
+    const [name, setName] = useFormState('');
+    const [addressLine1, setAddressLine1] = useFormState('');
+    const [addressLine2, setAddressLine2] = useFormState('');
+    const [date, setDate] = useFormState('');
 
 
-    const [detailsRequireList, setDetailsRequire] = React.useState([
+    const [detailsRequireList, setDetailsRequire] = useState([
         "Handicapped",
         "Disabled",
-        "Senior"
+        "Senior",
+        "Junior"
     ]);
-    const [detailsSelectList, setDetailsSelect] = React.useState(["Junior"]);
+    const [detailsSelectList, setDetailsSelect] = useState([]);
 
-
-    const handleSelect = (event) => {
-        setEducation(event.target.value);
-    };
-
-    const handleRadio = (event) => {
-        setGender(event.target.value);
-    };
 
     const handleClickShowPassword = () => {
         setShowPassWord(!showPassword);
     };
 
-    const handlePassword = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handleName = (event) => {
-        setName(event.target.value);
-    };
-
-    const handleAddressLine1 = (event) => {
-        setAddressLine1(event.target.value);
-    };
-
-    const handleAddressLine2 = (event) => {
-        setAddressLine2(event.target.value);
-    };
-
-    const handleDate = (event) => {
-        setDate(event.target.value);
-    };
 
     const handleDetailsReruireSelected = (props) => (event) => {
         var detailsRequireList1 = [...detailsRequireList];
@@ -141,7 +116,7 @@ export default function Sports() {
                                 size="small"
                                 fullWidth={true}
                                 required
-                                onChange={handleName}
+                                onChange={setName}
                             />
                         </Grid>
                         <Grid item md={3} sm={4} xs={12}>
@@ -152,7 +127,7 @@ export default function Sports() {
                                 size="small"
                                 fullWidth={true}
                                 value={education}
-                                onChange={handleSelect}
+                                onChange={setEducation}
                             >
                                 {educations.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -174,7 +149,7 @@ export default function Sports() {
                                 size="small"
                                 fullWidth={true}
                                 required
-                                onChange={handleAddressLine1}
+                                onChange={setAddressLine1}
                             />
                         </Grid>
                         <Grid item md={4} sm={5} xs={12}>
@@ -184,7 +159,7 @@ export default function Sports() {
                                 variant="filled"
                                 size="small"
                                 fullWidth={true}
-                                onChange={handleAddressLine2}
+                                onChange={setAddressLine2}
                             />
                         </Grid>
                         <Grid item md={4} sm={2} xs={12}>
@@ -197,17 +172,17 @@ export default function Sports() {
                                 size="small"
                                 type="date"
                                 defaultValue="1996-09-09"
-                                onChange={handleDate}
+                                onChange={setDate}
                             />
                         </Grid>
                     </Grid>
                     <Grid container item spacing={2}>
                         <Grid item xs={8}>
                             <FormLabel>Gender&emsp;</FormLabel>
-                            <RadioGroup value={gender} onChange={handleRadio} style={{ display: 'inline' }}>
-                                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                            <RadioGroup value={gender} onChange={setGender} style={{ display: 'inline' }}>
+                                <FormControlLabel value="Female" control={<Radio />} label="Female" />
+                                <FormControlLabel value="Male" control={<Radio />} label="Male" />
+                                <FormControlLabel value="Other" control={<Radio />} label="Other" />
                             </RadioGroup>
                         </Grid>
                     </Grid>
@@ -220,7 +195,7 @@ export default function Sports() {
                                 type={showPassword ? 'text' : 'password'}
                                 value={password}
                                 required
-                                onChange={handlePassword}>
+                                onChange={setPassword}>
                             </TextField>
                             <IconButton
                                 onClick={handleClickShowPassword}

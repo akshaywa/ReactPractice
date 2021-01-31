@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useContext } from 'react';
+import React, { useLayoutEffect, useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,6 +18,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { ThemeContext } from "./ThemeContext.js";
+import { LanguageContext } from "./LanguageContext.js";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -57,7 +58,7 @@ function useWindowSize() {
     return size;
 }
 
-export default function ButtonAppBar(props) {
+export default function ButtonAppBar() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [navigationItem, setNavigationItem] = React.useState(null);
@@ -65,6 +66,7 @@ export default function ButtonAppBar(props) {
     const [open, setOpen] = React.useState(false);
     const [width] = useWindowSize();
     const { isDarkMode } = useContext(ThemeContext);
+    const { navigationList, musicList, sportsList, newsList, moviesList } = useContext(LanguageContext);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -72,23 +74,23 @@ export default function ButtonAppBar(props) {
         setNavigationItem(event.currentTarget.innerText);
 
         switch (event.currentTarget.innerText) {
-            case "Music":
-                setSubNavigationList(props.musicList);
+            case navigationList[0]:
+                setSubNavigationList(musicList);
                 break;
-            case "Sports": setSubNavigationList(props.sportsList);
+            case navigationList[1]: setSubNavigationList(moviesList);
                 break;
-            case "News": setSubNavigationList(props.newsList);
+            case navigationList[2]: setSubNavigationList(sportsList);
                 break;
-            case "Movies": setSubNavigationList(props.moviesList);
+            case "News": setSubNavigationList(newsList);
                 break;
             default: setSubNavigationList([]);
                 break;
-        }        
+        }
     };
 
     const handleClose = (event) => {
         setAnchorEl(null);
-        setSubNavigationList([]);        
+        setSubNavigationList([]);
         setOpen(false);
     };
 
@@ -120,7 +122,7 @@ export default function ButtonAppBar(props) {
                 <ListItem button key={"Login"}>
                     <ListItemText primary={"Login"} onClick={handleDrawerClose} />
                 </ListItem>
-                {['Music', 'Movies', 'Sports'].map((text) => (
+                {navigationList.map((text) => (
                     <ListItem button key={text}>
                         <ListItemText primary={text} onClick={handleClick} />
                     </ListItem>
@@ -133,7 +135,7 @@ export default function ButtonAppBar(props) {
     return (
         <React.Fragment>
             <Toolbar>{/* content */}</Toolbar>
-            <AppBar color={isDarkMode ? "#525252": "primary"}>
+            <AppBar color={isDarkMode ? "black" : "primary"}>
                 <Toolbar>
                     <img src={logo} className='logo' alt="logo" />
                     {
@@ -148,7 +150,7 @@ export default function ButtonAppBar(props) {
                             :
                             <React.Fragment>
                                 {
-                                    props.navigationList.map(navigationItem => (
+                                    navigationList.map(navigationItem => (
                                         <Typography className={classes.title} onClick={handleClick} key={navigationItem}>
                                             {navigationItem}
                                         </Typography>

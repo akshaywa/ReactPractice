@@ -8,15 +8,25 @@ export default {
         switch (genre2) {
             case "Drama": id = 2;
                 break;
+            case "नाटक": id = 2;
+                break;
             case "Romance": id = 1;
+                break;
+            case "रोमांस": id = 1;
                 break;
             case "Action": id = 4;
                 break;
+            case "ऐकशन": id = 4;
+                break;
             case "Adventure": id = 5;
+                break;
+            case "साहसिक": id = 5;
                 break;
             case "Biopic": id = 6;
                 break;
-            default: id = 1;
+            case "बायोपिक": id = 6;
+                break;
+            default: id = 2;
                 break;
         }
 
@@ -35,6 +45,24 @@ export default {
 
     getMusic(genre2) {
         const apiKey = "e5cb67fsZKFQqHejbt0twPcQAZiXCvDV6kbWdIRijMdWPuhmktnQaNVd";
+
+        switch (genre2) {
+            case "क्लासिक": genre2 = "Classic";
+                break;
+            case "डिस्को": genre2 = "Disco";
+                break;
+            case "इलेक्ट्रोनिक": genre2 = "Electronic";
+                break;
+            case "बॉलीवुड": genre2 = "Bollywood";
+                break;
+            case "रेप": genre2 = "Rap";
+                break;
+            case "इलेक्ट्रॉनिक": genre2 = "Electronic";
+                break;
+            case "रॅप": genre2 = "Rap";
+                break;
+            default : break;
+        }
 
         const baseURL = "https://api.happi.dev/v1/music?q=" + genre2 + "&limit=&apikey=" + apiKey + "&type=";
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,14 +17,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function BottomAppBar() {
+function BottomAppBar() {
   const classes = useStyles();
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const { language, changeLanguage } = useContext(LanguageContext);
 
   return (
     <React.Fragment>
-      <AppBar position="fixed" color={isDarkMode ? 'black' : "primary"} className={classes.appBar}>
+      <AppBar position="fixed" color={isDarkMode ? "inherit" : "primary"} className={classes.appBar}>
         <Toolbar>
           <FormControlLabel
             control={<Switch name="theme" onChange={toggleTheme} />}
@@ -39,3 +39,5 @@ export default function BottomAppBar() {
     </React.Fragment>
   );
 }
+
+export default memo(BottomAppBar);

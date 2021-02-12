@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +10,7 @@ import { Grid } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
 
-export default function Movies(props) {
+function Movies(props) {
     const [movieList, setMovieList] = React.useState([]);
 
     useEffect(() => {
@@ -81,3 +81,5 @@ export default function Movies(props) {
         </div >
     );
 }
+
+export default memo(Movies);

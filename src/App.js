@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './App.css';
-import Navigation from './component/Navigation.js'
+import Navigation from './component/Navigation.js';
 import BottomAppBar from './component/BottomNavigation.js';
-import Movies from './component/Movies.js'
-import Music from './component/Music.js'
-import News from './component/News.js'
-import Sports from './component/Sports.js'
+import Movies from './component/Movies.js';
+import Music from './component/Music.js';
+import Sports from './component/Sports.js';
 import { Grid } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import { LanguageProvider } from './component/LanguageContext.js';
 import { ThemeProvider } from './component/ThemeContext.js';
 import PageContent from './component/PageContent.js';
 
-export default function App() {
+function App() {
   const getMusic = props => {
     var genre = props.match.params.genre;
     return <Music genre2={genre} />
@@ -21,11 +20,6 @@ export default function App() {
   const getSports = props => {
     var genre = props.match.params.genre;
     return <Sports genre2={genre} />
-  }
-
-  const getNews = props => {
-    var genre = props.match.params.genre;
-    return <News genre2={genre} />
   }
 
   const getMovies = props => {
@@ -47,10 +41,9 @@ export default function App() {
                 <Route exact path="/" render={() => <Music genre2={"Classic"} />} />
                 <Route exact path="/music/:genre" render={getMusic} />
                 <Route exact path="/संगीत/:genre" render={getMusic} />
-                <Route exact path="/sports/:genre" render={getSports} />                
-                <Route exact path="/खेल/:genre" render={getSports} />                
+                <Route exact path="/sports/:genre" render={getSports} />
+                <Route exact path="/खेल/:genre" render={getSports} />
                 <Route exact path="/खेळ/:genre" render={getSports} />
-                <Route exact path="/news/:genre" render={getNews} />
                 <Route exact path="/movies/:genre" render={getMovies} />
                 <Route exact path="/चलचित्र/:genre" render={getMovies} />
                 <Route exact path="/चित्रपट/:genre" render={getMovies} />
@@ -63,3 +56,5 @@ export default function App() {
     </LanguageProvider>
   );
 }
+
+export default memo(App);

@@ -7,7 +7,6 @@ export function LanguageProvider(props) {
     const [navigationList, setNavigationList] = React.useState(["Music", "Movies", "Sports"]);
     const [musicList, setMusicList] = React.useState(["Classic", "Disco", "Bollywood", "Electronic", "Rap"]);
     const [sportsList, setSportsList] = React.useState(["Cricket", "Football", "Wimbledon", "Olympics", "IPL"]);
-    const [newsList, setNewsList] = React.useState(["Regional", "National", "International", "Sports", "Covid19"]);
     const [moviesList, setMoviesList] = React.useState(["Drama", "Romance", "Action", "Adventure", "Biopic"]);
     
 
@@ -39,7 +38,7 @@ export function LanguageProvider(props) {
     }
 
     return (
-        <LanguageContext.Provider value={{ language, changeLanguage, navigationList, musicList, sportsList, newsList, moviesList }}>
+        <LanguageContext.Provider value={{ language, changeLanguage, navigationList, musicList, sportsList, moviesList }}>
             {props.children}
         </LanguageContext.Provider>
     )

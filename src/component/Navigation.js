@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useContext, useEffect } from 'react';
+import React, { useLayoutEffect, useState, useContext, memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -33,9 +33,13 @@ const useStyles = makeStyles(() => ({
         fontSize: 17,
         color: "#fff"
     },
-    linkStyle: {
+    linkStyle1: {
         textDecoration: 'none',
         color: '#3f51b5'
+    },
+    linkStyle2: {
+        textDecoration: 'none',
+        color: 'rgba(0, 0, 0, 0.87)'
     },
     drawerPaper: {
         width: 240,
@@ -58,7 +62,7 @@ function useWindowSize() {
     return size;
 }
 
-export default function ButtonAppBar() {
+function ButtonAppBar() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [navigationItem, setNavigationItem] = React.useState(null);
@@ -66,7 +70,7 @@ export default function ButtonAppBar() {
     const [open, setOpen] = React.useState(false);
     const [width] = useWindowSize();
     const { isDarkMode } = useContext(ThemeContext);
-    const { navigationList, musicList, sportsList, newsList, moviesList } = useContext(LanguageContext);
+    const { navigationList, musicList, sportsList, moviesList } = useContext(LanguageContext);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -80,8 +84,6 @@ export default function ButtonAppBar() {
             case navigationList[1]: setSubNavigationList(moviesList);
                 break;
             case navigationList[2]: setSubNavigationList(sportsList);
-                break;
-            case "News": setSubNavigationList(newsList);
                 break;
             default: setSubNavigationList([]);
                 break;
@@ -135,7 +137,7 @@ export default function ButtonAppBar() {
     return (
         <React.Fragment>
             <Toolbar>{/* content */}</Toolbar>
-            <AppBar color={isDarkMode ? "black" : "primary"}>
+            <AppBar color={isDarkMode ? "inherit" : "primary"}>
                 <Toolbar>
                     <img src={logo} className='logo' alt="logo" />
                     {
@@ -167,7 +169,7 @@ export default function ButtonAppBar() {
                         onClose={handleClose}>
                         {
                             subNavigationList.map(subNavigationItem => (
-                                <Link key={subNavigationItem} to={"/" + navigationItem + "/" + subNavigationItem} className={classes.linkStyle}>
+                                <Link key={subNavigationItem} to={"/" + navigationItem + "/" + subNavigationItem} className={isDarkMode ? classes.linkStyle2:classes.linkStyle1}>
                                     <MenuItem onClick={handleClose}>{subNavigationItem}</MenuItem>
                                 </Link>
                             ))
@@ -180,3 +182,5 @@ export default function ButtonAppBar() {
         </React.Fragment>
     );
 }
+export default memo(ButtonAppBar);
+

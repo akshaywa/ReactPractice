@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -55,7 +55,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Music(props) {
+function Music(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
@@ -119,7 +119,9 @@ export default function Music(props) {
                 <span style={{ color: 'black', fontSize: 17 }}>
                     Click on each Music type in navigation, you will get different Musics from api.<br />
                 You can delete row. You can change rows per page.<br />
-                Minimize screen the navbar will convert to drawer.
+                Minimize screen the navbar will convert to drawer.<br/>
+                Use dark theme.<br/>
+                Change language and navigate.
                 </span>
             </Paper>
             <br />
@@ -199,3 +201,5 @@ export default function Music(props) {
     );
 
 }
+
+export default memo(Music);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import './Sports.css';
@@ -36,7 +36,7 @@ const educations = [
     },
 ];
 
-export default function Sports() {
+function Sports() {
     const [education, setEducation] = useFormState('');
     const [gender, setGender] = useFormState('Female');
     const [showPassword, setShowPassWord] = useState(false);
@@ -44,7 +44,7 @@ export default function Sports() {
     const [name, setName] = useFormState('');
     const [addressLine1, setAddressLine1] = useFormState('');
     const [addressLine2, setAddressLine2] = useFormState('');
-    const [date, setDate] = useFormState('');
+    const [date, setDate] = useFormState('1996-09-09');
 
 
     const [detailsRequireList, setDetailsRequire] = useState([
@@ -244,3 +244,5 @@ export default function Sports() {
         </div>
     );
 }
+
+export default memo(Sports);

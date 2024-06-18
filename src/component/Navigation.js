@@ -21,10 +21,6 @@ import { ThemeContext } from "./ThemeContext.js";
 import { LanguageContext } from "./LanguageContext.js";
 
 const useStyles = makeStyles(() => ({
-    root: {
-        flexGrow: 1,
-        position: "sticky"
-    },
     title: {
         flexGrow: 1,
         fontSize: 18,

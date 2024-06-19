@@ -6,28 +6,13 @@ import Movies from './component/Movies.js';
 import Music from './component/Music.js';
 import Sports from './component/Sports.js';
 import { Grid } from '@material-ui/core';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import { LanguageProvider } from './component/LanguageContext.js';
 import { ThemeProvider } from './component/ThemeContext.js';
 import PageContent from './component/PageContent.js';
 
 function App() {
-  const getMusic = props => {
-    var genre = props.match.params.genre;
-    return <Music genre2={genre} />
-  }
-
-  const getSports = props => {
-    var genre = props.match.params.genre;
-    return <Sports genre2={genre} />
-  }
-
-  const getMovies = props => {
-    var genre = props.match.params.genre;
-    return <Movies genre2={genre} />
-  }
-
-
+  const { genre } = useParams();
   return (
     <LanguageProvider>
       <ThemeProvider>
@@ -37,17 +22,17 @@ function App() {
               <Navigation />
             </Grid>
             <Grid item xs={12} className='mainContainer'>
-              <Switch>
-                <Route exact path="/" render={() => <Music genre2={"Classic"} />} />
-                <Route exact path="/music/:genre" render={getMusic} />
-                <Route exact path="/संगीत/:genre" render={getMusic} />
-                <Route exact path="/sports/:genre" render={getSports} />
-                <Route exact path="/खेल/:genre" render={getSports} />
-                <Route exact path="/खेळ/:genre" render={getSports} />
-                <Route exact path="/movies/:genre" render={getMovies} />
-                <Route exact path="/चलचित्र/:genre" render={getMovies} />
-                <Route exact path="/चित्रपट/:genre" render={getMovies} />
-              </Switch>
+                <Routes>
+                  <Route path="/" element={<Music genre2={"Classic"} />} />
+                  <Route path="/music/:genre" element={<Music genre2={genre} />} />
+                  <Route path="/संगीत/:genre" element={<Music genre2={genre} />} />
+                  <Route path="/sports/:genre" element={<Sports genre2={genre} />} />
+                  <Route path="/खेल/:genre" element={<Sports genre2={genre} />} />
+                  <Route path="/खेळ/:genre" element={<Sports genre2={genre} />} />
+                  <Route path="/movies/:genre" element={<Movies genre2={genre} />} />
+                  <Route path="/चलचित्र/:genre" element={<Movies genre2={genre} />} />
+                  <Route path="/चित्रपट/:genre" element={<Movies genre2={genre} />} />
+                </Routes>
             </Grid>
           </Grid>
           <BottomAppBar />

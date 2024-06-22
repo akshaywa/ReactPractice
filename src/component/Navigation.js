@@ -100,8 +100,6 @@ function ButtonAppBar() {
         setOpen(false);
     };
 
-
-
     const list = (
         <Drawer
             anchor="right"

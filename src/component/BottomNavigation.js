@@ -24,7 +24,7 @@ function BottomAppBar() {
 
   return (
     <React.Fragment>
-      <AppBar position="fixed" color={isDarkMode ? "inherit" : "primary"} className={classes.appBar}>
+      <AppBar position="fixed" color={isDarkMode ? "inherit" : "primary"} className={`${classes.appBar}`}>
         <Toolbar>
           <FormControlLabel
             control={<Switch name="theme" onChange={toggleTheme} />}

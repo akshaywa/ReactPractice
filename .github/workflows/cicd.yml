@@ -14,7 +14,7 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t walunja1/reactjs-app
+        run: docker build -t walunja1/reactjs-app:latest
       - name: Publish Image to Docker Hub
         run: docker push walunja1/reactjs-app:latest
 
@@ -27,4 +27,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f reactContainer
       - name: Run docker container
-        run: docker run -d -p 3000:80 --name reactContainer walunja1/reactjs-app
+        run: docker run -d -p 3000:80 --name reactContainer walunja1/reactjs-app:latest

@@ -14,7 +14,7 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t walunja1/reactjs-app:latest
+        run: docker build -t walunja1/reactjs-app:latest .
       - name: Publish Image to Docker Hub
         run: docker push walunja1/reactjs-app:latest
 

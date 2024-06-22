@@ -165,7 +165,7 @@ function ButtonAppBar() {
                         onClose={handleClose}>
                         {
                             subNavigationList.map(subNavigationItem => (
-                                <Link key={subNavigationItem} to={"/" + navigationItem + "/" + subNavigationItem} className={isDarkMode ? classes.linkStyle2:classes.linkStyle1}>
+                                <Link key={subNavigationItem} to={"/" + navigationItem + "/" + subNavigationItem} className={isDarkMode ? classes.linkStyle2 : classes.linkStyle1}>
                                     <MenuItem onClick={handleClose}>{subNavigationItem}</MenuItem>
                                 </Link>
                             ))
@@ -174,7 +174,7 @@ function ButtonAppBar() {
                 </Toolbar>
             </AppBar>
 
-            { width < 780 ? list : ''}
+            {width < 780 ? list : ''}
         </React.Fragment>
     );
 }

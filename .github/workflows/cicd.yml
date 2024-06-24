@@ -23,11 +23,8 @@ jobs:
 
   DeployDev:
     name: Deploy to Dev
-    if: github.event_name == 'pull_request'
     needs: build
     runs-on: aws-ec2
-    environment:
-      name: Development
     steps:
       - name: Pull image from docker
         run: docker pull walunja1/reactjs-app:latest

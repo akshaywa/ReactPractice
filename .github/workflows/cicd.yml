@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
@@ -18,9 +21,13 @@ jobs:
       - name: Publish Image to Docker Hub
         run: docker push walunja1/reactjs-app:latest
 
-  deploy:
+  DeployDev:
+    name: Deploy to Dev
+    if: github.event_name == 'pull_request'
     needs: build
     runs-on: aws-ec2
+    environment:
+      name: Development
     steps:
       - name: Pull image from docker
         run: docker pull walunja1/reactjs-app:latest
